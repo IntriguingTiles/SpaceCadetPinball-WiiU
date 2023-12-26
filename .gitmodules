@@ -1,4 +1,0 @@
-[submodule "SDL"]
-	path = SDL
-	url = https://github.com/GaryOderNichts/SDL
-	branch = wiiu-sdl2-2.0.22
