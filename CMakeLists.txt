@@ -27,12 +27,11 @@ endif()
 set(SDL2_BUILDING_LIBRARY ON)
 
 find_package(PkgConfig REQUIRED)
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
 PKG_SEARCH_MODULE(SDL2_MIXER REQUIRED SDL2_mixer)
 
-add_subdirectory(SDL)
-
-include_directories(${SDL2_SOURCE_DIR}/include ${SDL2_MIXER_INCLUDE_DIRS})
-link_directories(${SDL2_BINARY_DIR} ${SDL2_MIXER_LIBRARY_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS})
+link_directories(${SDL2_LIBRARY_DIRS} ${SDL2_MIXER_LIBRARY_DIRS})
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
   message(STATUS "Include dir='${dir}'")
@@ -228,7 +227,7 @@ if(${CMAKE_VERSION} VERSION_GREATER "3.16.0" OR ${CMAKE_VERSION} VERSION_EQUAL "
             )
 endif()
 
-target_link_libraries(SpaceCadetPinball SDL2-static ${SDL2_MIXER_LIBRARIES})
+target_link_libraries(SpaceCadetPinball SDL2 ${SDL2_MIXER_LIBRARIES})
 
 # On Windows, copy DLL to output
 if(WIN32)
